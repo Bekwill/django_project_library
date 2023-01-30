@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ author }}</title>
+</head>
+<body>
+<h1>
+  {{author}}
+</h1>
+<a href=" {% url 'author-update' author.pk %}">Edit Author</a>
+<form action="{% url 'author-delete' author.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete Author">
+</form>
+
+
+{% if author.picture %}
+    <img src="{{author.picture.url}}" alt="">
+ {%endif%}
+
+<h3>
+  books:
+</h3>
+
+<ul>
+  {% for book in author.books.all %}
+  <li>{{book}}</li>
+  {% endfor %}
+</ul>
+</body>
+</html>
